@@ -4,10 +4,10 @@ This project is a significant upgrade to a previous Python-based command line <a
 
 ## Tech Stack
 
-- **Frontend (UI):** HTML, CSS, JavaScript 
-- **Backend:** Python Flask
+- **Frontend:** HTML, CSS (Bootstrap), JavaScript 
+- **Backend :** Python Flask Server
 - **Database:** MySQL 
-
+- Used JQuery for AJAX requests and Bootstrap for styling. 
 ## Database Schema 
 
 ![Database Schema](photos/database.png)

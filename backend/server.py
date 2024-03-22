@@ -13,7 +13,7 @@ app = Flask(__name__)
 # '/' is the root or entry point of the website
 @app.route('/getProducts')
 def home():
-    logging.info("Getting all products")
+    print("Getting all products")
     result = product_dao.get_all_products()
     response = jsonify(result)
     response.headers.add('Access-Control-Allow-Origin', '*') # This is to allow the frontend to access the backend
