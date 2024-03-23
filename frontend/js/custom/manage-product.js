@@ -6,10 +6,10 @@ var productModal = $("#productModal");
             if(response) {
                 var table = '';
                 $.each(response, function(index, product) {
-                    table += '<tr data-id="'+ product.product_id +'" data-name="'+ product.name +'" data-unit="'+ product.uom_id +'" data-price="'+ product.price_per_unit +'">' +
-                        '<td>'+ product.name +'</td>'+
-                        '<td>'+ product.uom_name +'</td>'+
-                        '<td>'+ product.price_per_unit +'</td>'+
+                    table += '<tr data-id="'+ product[0] +'" data-name="'+ product[1] +'" data-unit="'+ product[2] +'" data-price="'+ product[3] +'">' +
+                        '<td>'+ product[1] +'</td>'+
+                        '<td>'+ product[2] +'</td>'+
+                        '<td>'+ product[3] +'</td>'+
                         '<td><span class="btn btn-xs btn-danger delete-product">Delete</span></td></tr>';
                 });
                 $("table").find('tbody').empty().html(table);
@@ -60,7 +60,7 @@ var productModal = $("#productModal");
         $("#id").val('0');
         $("#name, #unit, #price").val('');
         productModal.find('.modal-title').text('Add New Product');
-    });
+    }); // Clear form data on modal close
 
     productModal.on('show.bs.modal', function(){
         //JSON data by API call
@@ -73,4 +73,4 @@ var productModal = $("#productModal");
                 $("#uoms").empty().html(options);
             }
         });
-    });
+    }); // Load UOM list on modal open

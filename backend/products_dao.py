@@ -8,7 +8,8 @@ class ProductDAO:
     def get_all_products(self):
         with self.connection.cursor() as cursor:
             query = (
-                "SELECT products.product_id, products.name, uom.uom_name, products.price_per_unit "
+                "SELECT products.product_id, products.name, uom.uom_name, "
+                "products.price_per_unit "
                 "FROM products "
                 "inner join uom "
                 "on uom.uom_id=products.uom_id "
@@ -31,13 +32,13 @@ class ProductDAO:
             result = cursor.fetchall()
         return result
 
-    def insert_product(self, product_name, uom_id, price_per_unit):
+    def insert_product(self, product):
         with self.connection.cursor() as cursor:
             query = (
                 "INSERT INTO products (name, uom_id, price_per_unit) "
                 "VALUES (%s, %s, %s)"
             )
-            cursor.execute(query, (product_name, uom_id, price_per_unit))
+            cursor.execute(query, (product["product_name"], product["uom_id"], product["price_per_unit"]))
             self.connection.commit()
             last_row_id = cursor.lastrowid
         return last_row_id
