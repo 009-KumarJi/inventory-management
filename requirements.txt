@@ -1,0 +1,7 @@
+python-dotenv
+mysql-connector-python
+flask
+json
+logging
+datetime
+```

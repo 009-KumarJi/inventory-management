@@ -11,3 +11,9 @@ This project is a significant upgrade to a previous Python-based command line <a
 ## Database Schema 
 
 ![Database Schema](photos/database.png)
+
+## Features
+
+- View all products
+- Add a new product
+- Delete a product

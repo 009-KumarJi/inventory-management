@@ -1,3 +1,4 @@
+
 def get_uoms(connection):
     with connection.cursor() as cursor:
         query = (
@@ -12,8 +13,3 @@ def get_uoms(connection):
                 "uom_name": uom_name,
             })
     return response
-
-if __name__ == '__main__':
-    from sql_connection import DatabaseConnection
-    connection = DatabaseConnection().connect()
-    print(get_uoms(connection))
