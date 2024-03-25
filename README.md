@@ -38,7 +38,8 @@ A step by step series of examples that tell you how to get a development environ
 
 1. Create a new MySQL database and run the following SQL script to create the required tables:
 
-```sql create table orders
+```sql
+create table orders
 (
     order_id      int auto_increment
         primary key,
