@@ -10,7 +10,7 @@ This project is a significant upgrade to a previous Python-based command line <a
 - Used JQuery for AJAX requests and Bootstrap for styling. 
 ## Database Schema 
 
-<img src="photos/database.png" width="500" height="300">
+<img src="photos/database.png" width="500" height="500">
 
 ## Features
 
