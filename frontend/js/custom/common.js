@@ -9,6 +9,9 @@ var orderSaveApiUrl = 'http://127.0.0.1:5000/insertOrder';
 // For product drop in order
 var productsApiUrl = 'https://fakestoreapi.com/products';
 
+// grand total of order
+var grandTotal = 0;
+
 function callApi(method, url, data) {
     $.ajax({
         method: method,
@@ -23,12 +26,13 @@ function calculateValue() {
     var total = 0;
     $(".product-item").each(function( index ) {
         var qty = parseFloat($(this).find('.product-qty').val());
-        var price = parseFloat($(this).find('#product_price').val());
+        var price = parseFloat($(this).find('.product-price').text());
         price = price*qty;
-        $(this).find('#item_total').val(price.toFixed(2));
+        $(this).find('#item_total').text(price.toFixed(2));
         total += price;
     });
-    $("#product_grand_total").val(total.toFixed(2));
+    $("#product_grand_total").text(total.toFixed(2));
+    grandTotal = total;
 }
 
 function orderParser(order) {

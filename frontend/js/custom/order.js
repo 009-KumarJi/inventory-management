@@ -5,10 +5,12 @@ $(function () {
     $.get(productListApiUrl, function (response) {
         productPrices = {}
         if(response) {
+            console.log(response);
             var options = '<option value="">--Select--</option>';
             $.each(response, function(index, product) {
-                options += '<option value="'+ product.product_id +'">'+ product.name +'</option>';
-                productPrices[product.product_id] = product.price_per_unit;
+                console.log(product);
+                options += '<option value="'+ product[0] +'">'+ product[1] +'</option>';
+                productPrices[product[0]] = product[3];
             });
             $(".product-box").find("select").empty().html(options);
         }
@@ -33,7 +35,7 @@ $(document).on("change", ".cart-product", function (){
     var product_id = $(this).val();
     var price = productPrices[product_id];
 
-    $(this).closest('.row').find('#product_price').val(price);
+    $(this).closest('.row').find('.product-price').text(price);
     calculateValue();
 });
 
@@ -42,38 +44,38 @@ $(document).on("change", ".product-qty", function (e){
 });
 
 $("#saveOrder").on("click", function(){
+    var customerName = $("#customerName").val();
+    if (!customerName) {
+        alert("Customer Name is required");
+        return;
+    }
+    if (!grandTotal) {
+        alert("Please add some products");
+        return;
+    }
     var formData = $("form").serializeArray();
     var requestPayload = {
-        customer_name: null,
-        total: null,
+        customer_name: customerName,
+        total: grandTotal,
         order_details: []
     };
-    var orderDetails = [];
     for(var i=0;i<formData.length;++i) {
         var element = formData[i];
         var lastElement = null;
 
         switch(element.name) {
-            case 'customerName':
-                requestPayload.customer_name = element.value;
-                break;
-            case 'product_grand_total':
-                requestPayload.grand_total = element.value;
-                break;
             case 'product':
+                var price = productPrices[element.value];
                 requestPayload.order_details.push({
                     product_id: element.value,
                     quantity: null,
-                    total_price: null
+                    total_price: price
                 });                
                 break;
             case 'qty':
                 lastElement = requestPayload.order_details[requestPayload.order_details.length-1];
-                lastElement.quantity = element.value
-                break;
-            case 'item_total':
-                lastElement = requestPayload.order_details[requestPayload.order_details.length-1];
-                lastElement.total_price = element.value
+                lastElement.quantity = element.value;
+                lastElement.total_price *= element.value;
                 break;
         }
 
