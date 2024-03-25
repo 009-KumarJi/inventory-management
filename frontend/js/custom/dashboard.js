@@ -6,8 +6,10 @@ $(function () {
             var totalCost = 0;
             $.each(response, function(index, order) {
                 totalCost += parseFloat(order.total);
+                var dateInGMT = order.datetime;
+                var dateInIST = dateInGMT.toLocaleString().replace('GMT', '');
                 table += '<tr>' +
-                    '<td>'+ order.datetime +'</td>'+
+                    '<td>'+ dateInIST +'</td>'+
                     '<td>'+ order.order_id +'</td>'+
                     '<td>'+ order.customer_name +'</td>'+
                     '<td>'+ order.total.toFixed(2) +' Rs</td></tr>';

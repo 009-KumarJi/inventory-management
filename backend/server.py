@@ -58,6 +58,15 @@ def insert_order():
     return response
 
 
+@app.route('/getAllOrders', methods=['GET'])
+def get_orders():
+    from orders_dao import get_all_orders
+    result = get_all_orders(db)
+    response = jsonify(result)
+    response.headers.add('Access-Control-Allow-Origin', '*')
+    return response
+
+
 if __name__ == '__main__':
     logging.info("Starting Flask app")
     app.run(port=5000)

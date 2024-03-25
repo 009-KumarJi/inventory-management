@@ -1,4 +1,23 @@
 from datetime import datetime
+import pytz
+
+
+def get_all_orders(connection):
+    with connection.cursor() as cursor:
+        query = (
+            "SELECT * FROM orders"
+        )
+        cursor.execute(query)
+        result = cursor.fetchall()
+        response = []
+        for record in result:
+            response.append({
+                "order_id": record[0],
+                "customer_name": record[1],
+                "total": record[3],
+                "datetime": record[2]
+            })
+    return response
 
 
 def insert_order(connection, o_details):
